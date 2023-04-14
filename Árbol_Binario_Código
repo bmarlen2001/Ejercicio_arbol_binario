@@ -1,0 +1,44 @@
+class Node: 
+    def __init__(self, data): 
+        self.data = data  
+        self.left = None  
+        self.right = None
+
+
+def es_arbol_busqueda_binario(root): 
+	
+	# Si el árbol está vacío
+    if root is None: 
+        return True
+    
+    # Si hay un nodo sin hijo 
+    if root.left is None and root.right is None: 
+        return True
+	
+	# Si hay un nodo con un hijo izquierdo
+    if root.left and not root.right: 
+        return (root.left.data < root.data and
+                es_arbol_busqueda_binario(root.left)) 
+	
+	# Si hay un nodo con un hijo derecho
+    if root.right and not root.left: 
+        return (root.right.data > root.data and
+                es_arbol_busqueda_binario(root.right)) 
+	
+	# Si hay dos hijos
+    if root.left and root.right: 
+        return (root.left.data < root.data < root.right.data and
+                es_arbol_busqueda_binario(root.left) and
+                es_arbol_busqueda_binario(root.right)) 
+
+# Se modifican y añaden los numeros para saber si es o no un árbol binario
+root = Node(8) 
+root.left = Node(3) 
+root.right = Node(1) 
+root.left.left = Node(0) 
+root.left.right = Node(3) 
+
+if es_arbol_busqueda_binario(root): 
+	print("Si es un árbol de búsqueda binaria")
+else: 
+	print("No es un árbol de búsqueda binaria")
